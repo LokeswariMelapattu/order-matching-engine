@@ -5,22 +5,34 @@ This project implements a simple **Order Matching Engine** in .NET 8, which proc
 
 ## Project Structure
 ```
-OrderMatchingEngine/
-│── OrderMatchingEngine.sln      # Solution file
+order-matching-engine/
+│── OrderMatchingEngine.sln                  # Solution file
 │
-├── OrderMatchingEngine/         # Core application
-│   ├── Models/                  # Domain models
-│   │   ├── Order.cs             # Represents an order (Buy/Sell)
-│   │   ├── Enums.cs             # Defines order types & statuses
-│   ├── Services/                # Business logic
-│   │   ├── MatchingEngine.cs    # Order matching logic
-│   ├── Program.cs               # Main entry point (if console app)
+├── OrderMatchingEngine.ConsoleApp/         # Console application
+│   ├── ExceptionHandler.cs                  # Global exception handler
+│   ├── OrderMatchingApp.cs                  # Order Matching application service
+│   ├── Program.cs                           # Main entry point
 │
-├── OrderMatchingEngine.Tests/   # Test project
-│   ├── MatchingEngineTests.cs   # Unit tests using xUnit & FluentAssertions
-│   ├── OrderTests.cs            # Tests for order behavior
+├── OrderMatchingEngine.Domain/              # Domain layer handling business logic and interactions with data access
+│   ├── Enums/                               # Enums for Order Matching Service
+│   │   ├── OrderType.cs                     # Enum for order types (Buy/Sell)
+│   │   ├── OrderStatus.cs                   # Enum for order statuses (New, Filled, PartiallyFilled, Canceled)
+│   ├── Order.cs                             # Entity representing order information
+│   ├── Trade.cs                             # Entity representing trade information
 │
-└── README.md                    # Documentation
+├── OrderMatchingEngine.ApplicationLogic/    # Business logic layer managing order operations
+│   ├── IOrderMatchingService.cs             # Interface for Order Matching Service
+│   ├── OrderMatchingService.cs              # Service handling order placement, cancellation, active orders, and trade history
+│
+├── OrderMatchingEngine.DataAccess/          # Data access layer managing in-memory order and trade storage
+│   ├── IOrderRepository.cs                  # Interface for Order repository
+│   ├── OrderRepository.cs                   # Repository implementation
+│
+├── OrderMatchingEngine.Tests/               # Test project
+│   ├── OrderMatchingServiceTests.cs         # Unit tests using xUnit & FluentAssertions
+│   ├── OrderTests.cs                        # Tests for order behavior
+│
+└── README.md                                # Documentation
 ```
 
 ## How to Run the Solution
@@ -28,7 +40,7 @@ This project is a **console application**. To execute it, follow these steps:
 
 ### 1. Clone the Repository
 ```sh
-git clone https://github.com/your-repo/order-matching-engine.git
+git clone https://github.com/LokeswariMelapattu/order-matching-engine.git
 cd order-matching-engine
 ```
 
@@ -41,7 +53,7 @@ dotnet build
 ### 3. Run the Application
 Execute the console app (if applicable):
 ```sh
-dotnet run --project OrderMatchingEngine
+dotnet run --project OrderMatchingEngine.ConsoleApp
 ```
 - The application takes user input for placing buy/sell orders and processes matches accordingly.
 
@@ -65,5 +77,5 @@ dotnet test
 5. Complex order sequences and proper matching behavior.
 
 ---
-For any issues or contributions, feel free to submit a pull request!
+ 
 
