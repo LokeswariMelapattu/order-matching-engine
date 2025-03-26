@@ -19,7 +19,7 @@ namespace OrderMatchingEngine.Tests
         /// <summary>
         /// Single order placement (no match)
         /// </summary>
-        [Fact]
+        [Fact(DisplayName= "Single order placement (no match)")] 
         public async Task PlaceOrder_SingleOrder_NoMatch()
         {
             var order = new Order(OrderType.Buy, 50.0m, 100);
@@ -33,7 +33,7 @@ namespace OrderMatchingEngine.Tests
         /// <summary>
         /// Fully matched order
         /// </summary>
-        [Fact]
+        [Fact(DisplayName = "Fully matched order")]
         public async Task PlaceOrder_FullyMatched()
         {
             var buyOrder = new Order(OrderType.Buy, 50.0m, 100);
@@ -53,7 +53,7 @@ namespace OrderMatchingEngine.Tests
         /// <summary>
         /// Partially matched order
         /// </summary>
-        [Fact]
+        [Fact(DisplayName = "Partially matched order")]
         public async Task PlaceOrder_PartiallyMatched()
         {
             var buyOrder = new Order(OrderType.Buy, 50.0m, 150);
@@ -70,7 +70,7 @@ namespace OrderMatchingEngine.Tests
         /// <summary>
         /// Canceling an order before match
         /// </summary>
-        [Fact]
+        [Fact(DisplayName = "Canceling an order before match")]
         public async Task CancelOrder_OrderCancelled()
         {
             var order = new Order(OrderType.Buy, 50.0m, 100);
@@ -84,7 +84,7 @@ namespace OrderMatchingEngine.Tests
         /// <summary>
         /// Complex scenario with multiple orders
         /// </summary>
-        [Fact]
+        [Fact(DisplayName = "Complex scenario with multiple orders")]
         public async Task PlaceOrder_ComplexMatchingScenario()
         {
             await _orderMatchingService.PlaceOrder(new Order(OrderType.Buy, 50.0m, 100));

@@ -64,7 +64,12 @@ Unit tests are written using **xUnit** and **FluentAssertions**.
 ```sh
 dotnet test
 ```
+or 
 
+For detailed Test case descriptions 
+```sh
+dotnet test --logger "console;verbosity=detailed"
+```
 ### Expected Output
 - If all tests pass, you’ll see a success message.
 - If a test fails, detailed error messages will indicate what went wrong.
