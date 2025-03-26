@@ -64,7 +64,7 @@ namespace OrderMatchingEngine.Tests
 
             var remainingBuyOrder = await _orderMatchingService.GetOrder(1);
             remainingBuyOrder?.Status.Should().Be(OrderStatus.PartiallyFilled);
-            remainingBuyOrder?.Quantity.Should().Be(50); // 100 matched, 50 remains
+            remainingBuyOrder?.RemainingQuantity.Should().Be(50); // 100 matched, 50 remains
         }
 
         /// <summary>
@@ -88,15 +88,16 @@ namespace OrderMatchingEngine.Tests
         public async Task PlaceOrder_ComplexMatchingScenario()
         {
             await _orderMatchingService.PlaceOrder(new Order(OrderType.Buy, 50.0m, 100));
-            await _orderMatchingService.PlaceOrder(new Order(OrderType.Buy, 48.0m, 200));
+            await _orderMatchingService.PlaceOrder(new Order(OrderType.Buy, 55.0m, 200));
             await _orderMatchingService.PlaceOrder(new Order(OrderType.Sell, 49.0m, 150));
             await _orderMatchingService.PlaceOrder(new Order(OrderType.Sell, 50.0m, 100));
+            await _orderMatchingService.PlaceOrder(new Order(OrderType.Buy, 48.0m, 50));
 
             var trades = await _orderMatchingService.GetTradeHistory();
-            trades.Count().Should().Be(2);
+            trades.Count().Should().Be(3);
 
             var remainingOrders = await _orderMatchingService.GetAllOrders();
-            remainingOrders.Count().Should().Be(1); // One order should remain partially filled
+            remainingOrders.Count().Should().Be(2); // One order should remain partially filled
         }
     }
 }
